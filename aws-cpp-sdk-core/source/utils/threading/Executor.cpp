@@ -129,6 +129,7 @@ bool PooledThreadExecutor::SubmitToThread(std::function<void()>&& fn)
 
         if (m_overflowPolicy == OverflowPolicy::REJECT_IMMEDIATELY && m_tasks.size() >= m_poolSize)
         {
+            Aws::Delete(fnCpy); //necessary?
             return false;
         }
 
